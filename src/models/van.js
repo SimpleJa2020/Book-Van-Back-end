@@ -19,5 +19,15 @@ module.exports = (sequelize, Datatypes) => {
             underscore: true
         }
     );
+
+    Van.associate = db => {
+        Van.belongsTo(db.Departure, {
+            foreignKey: {
+                name: 'departureId',
+                allowNull: false
+            },
+            onDelete: 'RESTRICT'
+        });
+    };
     return Van;
 };

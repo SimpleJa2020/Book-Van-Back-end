@@ -11,5 +11,23 @@ module.exports = (sequelize, Datatypes) => {
             underscore: true
         }
     );
+
+    Payment.associate = db => {
+        Payment.belongsTo(db.Passenger, {
+            foreignKey: {
+                name: 'passengerId',
+                allowNull: false
+            },
+            onDelete: 'RESTRICT'
+        });
+
+        Payment.hasMany(db.Reservation, {
+            foreignKey: {
+                name: 'paymentId',
+                allowNull: false
+            },
+            onDelete: 'RESTRICT'
+        });
+    };
     return Payment;
 };

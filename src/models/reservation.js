@@ -19,5 +19,31 @@ module.exports = (sequelize, Datatypes) => {
             underscore: true
         }
     );
+    Reservation.associate = db => {
+        Reservation.belongsTo(db.Passenger, {
+            foreignKey: {
+                name: 'passengerId',
+                allowNull: false
+            },
+            onDelete: 'RESTRICT'
+        });
+
+        Reservation.belongsTo(db.Payment, {
+            foreignKey: {
+                name: 'paymentId',
+                allowNull: false
+            },
+            onDelete: 'RESTRICT'
+        });
+
+        Reservation.belongsTo(db.Timetable, {
+            foreignKey: {
+                name: 'timetableId',
+                allowNull: false
+            },
+            onDelete: 'RESTRICT'
+        });
+    };
+
     return Reservation;
 };
