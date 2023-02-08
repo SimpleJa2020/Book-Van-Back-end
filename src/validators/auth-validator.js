@@ -49,7 +49,8 @@ const registerSchema = Joi.object({
     mobile: Joi.forbidden().when('emailOrMobile', {
         is: Joi.string().pattern(/^[0-9]{10}$/),
         then: Joi.string().default(Joi.ref('emailOrMobile'))
-    })
+    }),
+    role: Joi.string()
 });
 
 exports.validateRegister = validate(registerSchema);

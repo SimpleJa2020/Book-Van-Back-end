@@ -1,5 +1,6 @@
 module.exports = (sequelize, Datatypes) => {
     const gender = ['male', 'female'];
+    const role = ['user', 'admin'];
     const Passenger = sequelize.define(
         'Passenger',
         {
@@ -39,6 +40,10 @@ module.exports = (sequelize, Datatypes) => {
             password: {
                 type: Datatypes.STRING,
                 allowNull: false
+            },
+            role: {
+                type: Datatypes.ENUM(...role),
+                allowNull: true
             }
         },
         {
