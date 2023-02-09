@@ -3,7 +3,7 @@ module.exports = (sequelize, Datatypes) => {
         'Timetable',
         {
             date: {
-                type: Datatypes.DATE,
+                type: Datatypes.DATEONLY,
                 allowNull: false
             },
             time: {
@@ -12,22 +12,22 @@ module.exports = (sequelize, Datatypes) => {
             }
         },
         {
-            underscore: true
+            underscored: true,
+            timestamps: false
         }
     );
 
     Timetable.associate = db => {
-        Timetable.belongsTo(db.Departure, {
+        Timetable.hasMany(db.Reservation, {
             foreignKey: {
-                name: 'departureId',
+                name: 'timetableId',
                 allowNull: false
             },
             onDelete: 'RESTRICT'
         });
-
-        Timetable.hasMany(db.Reservation, {
+        Timetable.belongsTo(db.Departure, {
             foreignKey: {
-                name: 'timetableId',
+                name: 'departureId',
                 allowNull: false
             },
             onDelete: 'RESTRICT'

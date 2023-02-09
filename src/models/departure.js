@@ -17,7 +17,8 @@ module.exports = (sequelize, Datatypes) => {
             }
         },
         {
-            underscore: true
+            underscored: true,
+            timestamps: false
         }
     );
 

@@ -16,11 +16,19 @@ module.exports = (sequelize, Datatypes) => {
             }
         },
         {
-            underscore: true
+            underscored: true,
+            timestamps: false
         }
     );
 
     Van.associate = db => {
+        Van.hasMany(db.Reservation, {
+            foreignKey: {
+                name: 'vanId',
+                allowNull: false
+            },
+            onDelete: 'RESTRICT'
+        });
         Van.belongsTo(db.Departure, {
             foreignKey: {
                 name: 'departureId',

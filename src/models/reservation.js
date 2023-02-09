@@ -3,23 +3,28 @@ module.exports = (sequelize, Datatypes) => {
         'Reservation',
         {
             reservationDate: {
-                type: Datatypes.DATE,
+                type: Datatypes.DATEONLY,
                 allowNull: false
             },
             vanSeatNumber: {
                 type: Datatypes.INTEGER,
                 allowNull: false
-            },
-            isPaid: {
-                type: Datatypes.BOOLEAN,
-                defaultValue: false
             }
         },
         {
-            underscore: true
+            underscored: true,
+            timestamps: false
         }
     );
     Reservation.associate = db => {
+        Reservation.hasMany(db.Payment, {
+            foreignKey: {
+                name: 'reservationId',
+                allowNull: false
+            },
+            onDelete: 'RESTRICT'
+        });
+
         Reservation.belongsTo(db.Passenger, {
             foreignKey: {
                 name: 'passengerId',
@@ -28,14 +33,13 @@ module.exports = (sequelize, Datatypes) => {
             onDelete: 'RESTRICT'
         });
 
-        Reservation.belongsTo(db.Payment, {
+        Reservation.belongsTo(db.Van, {
             foreignKey: {
-                name: 'paymentId',
+                name: 'vanId',
                 allowNull: false
             },
             onDelete: 'RESTRICT'
         });
-
         Reservation.belongsTo(db.Timetable, {
             foreignKey: {
                 name: 'timetableId',

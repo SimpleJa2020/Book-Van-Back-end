@@ -3,27 +3,24 @@ module.exports = (sequelize, Datatypes) => {
         'Payment',
         {
             paymentDate: {
-                type: Datatypes.DATE,
+                type: Datatypes.DATEONLY,
                 allowNull: false
+            },
+            isPaid: {
+                type: Datatypes.BOOLEAN,
+                defaultValue: false
             }
         },
         {
-            underscore: true
+            underscored: true,
+            timestamps: false
         }
     );
 
     Payment.associate = db => {
-        Payment.belongsTo(db.Passenger, {
+        Payment.belongsTo(db.Reservation, {
             foreignKey: {
-                name: 'passengerId',
-                allowNull: false
-            },
-            onDelete: 'RESTRICT'
-        });
-
-        Payment.hasMany(db.Reservation, {
-            foreignKey: {
-                name: 'paymentId',
+                name: 'reservationId',
                 allowNull: false
             },
             onDelete: 'RESTRICT'
