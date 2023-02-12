@@ -16,21 +16,7 @@ exports.getAllDeparture = async (req, res, next) => {
         next(err);
     }
 };
-exports.getDestination = async (req, res, next) => {
-    try {
-        const { departure } = req.params;
-        const destination = await Departure.findAll({
-            where: {
-                startingTerminal: {
-                    [Op.like]: `%${departure}%`
-                }
-            }
-        });
-        res.status(200).json({ destination });
-    } catch (err) {
-        next(err);
-    }
-};
+
 // exports.getAllDeparture = async (req, res, next) => {
 //     try {
 //         const departure = await Departure.findAll({

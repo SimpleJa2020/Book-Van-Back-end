@@ -21,23 +21,7 @@ exports.createReservation = async (req, res, next) => {
 
 exports.getAllReservation = async (req, res, next) => {
     try {
-        // const departures = await Departure.findAll({
-        // include: [
-        //     {
-        //         model: Timetable
-        //     },
-        //     {
-        //         model: Van
-        //     }
-        // ]
-        // });
-
-        // const departureId = departures.map()
-
         const Reservations = await Reservation.findAll({
-            // where: {
-            //     timetableId: [req.passenger.id]
-            // },
             include: [
                 {
                     model: Passenger,
