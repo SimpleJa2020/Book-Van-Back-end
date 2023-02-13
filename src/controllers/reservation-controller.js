@@ -1,11 +1,5 @@
 // const { validateReservation } = require('../validators/reservation-validator');
-const {
-    Reservation,
-    Departure,
-    Timetable,
-    Van,
-    Passenger
-} = require('../models');
+const { Reservation, Trip, Passenger } = require('../models');
 exports.createReservation = async (req, res, next) => {
     try {
         console.log(req);

@@ -10,10 +10,10 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 
 const authRoute = require('./routes/auth-route');
-const adminRoute = require('./routes/admin-route');
 const departureRoute = require('./routes/departure-route');
 const reservationRoute = require('./routes/reservation-route');
 const bookingRoute = require('./routes/booking-route');
+const tripRoute = require('./routes/trip-route');
 const notFoundMiddleware = require('./middlewares/not-found');
 const errorMiddleware = require('./middlewares/error');
 const authenticateMiddleware = require('./middlewares/authenticate');
@@ -34,9 +34,9 @@ app.use(express.json());
 
 app.use('/auth', authRoute);
 app.use('/departure', authenticateMiddleware, departureRoute);
-app.use('/admin', authenticateMiddleware, adminRoute);
 app.use('/reservation', authenticateMiddleware, reservationRoute);
 app.use('/booking', authenticateMiddleware, bookingRoute);
+app.use('/trip', authenticateMiddleware, tripRoute);
 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);

@@ -26,15 +26,3 @@ exports.getAllBooking = async (req, res, next) => {
         next(err);
     }
 };
-
-exports.getAllSeat = async (req, res, next) => {
-    try {
-        const seats = await Seat.findAll({
-            where: req.body
-        });
-        console.log(seats);
-        res.status(200).json({ seats });
-    } catch (err) {
-        next(err);
-    }
-};
