@@ -1,17 +1,17 @@
-module.exports = (sequelize, Datatypes) => {
+module.exports = (sequelize, DataTypes) => {
     const Van = sequelize.define(
         'Van',
         {
             vanNumber: {
-                type: Datatypes.STRING,
+                type: DataTypes.INTEGER,
                 allowNull: false
             },
             vanStatus: {
-                type: Datatypes.BOOLEAN,
+                type: DataTypes.BOOLEAN,
                 defaultValue: true
             },
             vanSeat: {
-                type: Datatypes.INTEGER,
+                type: DataTypes.INTEGER,
                 allowNull: false
             }
         },
@@ -22,16 +22,9 @@ module.exports = (sequelize, Datatypes) => {
     );
 
     Van.associate = db => {
-        Van.hasMany(db.Reservation, {
+        Van.hasMany(db.Trip, {
             foreignKey: {
                 name: 'vanId',
-                allowNull: false
-            },
-            onDelete: 'RESTRICT'
-        });
-        Van.belongsTo(db.Departure, {
-            foreignKey: {
-                name: 'departureId',
                 allowNull: false
             },
             onDelete: 'RESTRICT'

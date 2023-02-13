@@ -1,13 +1,13 @@
-module.exports = (sequelize, Datatypes) => {
+module.exports = (sequelize, DataTypes) => {
     const Timetable = sequelize.define(
         'Timetable',
         {
             date: {
-                type: Datatypes.DATEONLY,
+                type: DataTypes.DATEONLY,
                 allowNull: false
             },
             time: {
-                type: Datatypes.TIME,
+                type: DataTypes.TIME,
                 allowNull: false
             }
         },
@@ -18,16 +18,9 @@ module.exports = (sequelize, Datatypes) => {
     );
 
     Timetable.associate = db => {
-        Timetable.hasMany(db.Reservation, {
+        Timetable.hasMany(db.Trip, {
             foreignKey: {
                 name: 'timetableId',
-                allowNull: false
-            },
-            onDelete: 'RESTRICT'
-        });
-        Timetable.belongsTo(db.Departure, {
-            foreignKey: {
-                name: 'departureId',
                 allowNull: false
             },
             onDelete: 'RESTRICT'

@@ -1,48 +1,48 @@
-module.exports = (sequelize, Datatypes) => {
+module.exports = (sequelize, DataTypes) => {
     const gender = ['male', 'female'];
     const role = ['user', 'admin'];
     const Passenger = sequelize.define(
         'Passenger',
         {
             firstName: {
-                type: Datatypes.STRING,
+                type: DataTypes.STRING,
                 allowNull: false,
                 validate: {
                     notEmpty: true
                 }
             },
             lastName: {
-                type: Datatypes.STRING,
+                type: DataTypes.STRING,
                 allowNull: false,
                 validate: {
                     notEmpty: true
                 }
             },
             gender: {
-                type: Datatypes.ENUM(...gender),
+                type: DataTypes.ENUM(...gender),
                 allowNull: false,
                 defaultValue: gender[0]
             },
             email: {
-                type: Datatypes.STRING,
+                type: DataTypes.STRING,
                 unique: true,
                 validate: {
                     isEmail: true
                 }
             },
             mobile: {
-                type: Datatypes.STRING,
+                type: DataTypes.STRING,
                 unique: true,
                 validate: {
                     is: /^[0-9]{10}$/
                 }
             },
             password: {
-                type: Datatypes.STRING,
+                type: DataTypes.STRING,
                 allowNull: false
             },
             role: {
-                type: Datatypes.ENUM(...role),
+                type: DataTypes.ENUM(...role),
                 allowNull: true
             }
         },

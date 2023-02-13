@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const { Departure, Timetable } = require('../models');
+const { Departure, Timetable, Seat } = require('../models');
 
 exports.getAllBooking = async (req, res, next) => {
     try {
@@ -22,6 +22,18 @@ exports.getAllBooking = async (req, res, next) => {
             }
         });
         res.status(200).json({ timeList });
+    } catch (err) {
+        next(err);
+    }
+};
+
+exports.getAllSeat = async (req, res, next) => {
+    try {
+        const seats = await Seat.findAll({
+            where: req.body
+        });
+        console.log(seats);
+        res.status(200).json({ seats });
     } catch (err) {
         next(err);
     }

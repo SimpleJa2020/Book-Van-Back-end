@@ -1,13 +1,9 @@
-module.exports = (sequelize, Datatypes) => {
+module.exports = (sequelize, DataTypes) => {
     const Reservation = sequelize.define(
         'Reservation',
         {
-            reservationDate: {
-                type: Datatypes.DATEONLY,
-                allowNull: false
-            },
             vanSeatNumber: {
-                type: Datatypes.INTEGER,
+                type: DataTypes.INTEGER,
                 allowNull: false
             }
         },
@@ -17,7 +13,7 @@ module.exports = (sequelize, Datatypes) => {
         }
     );
     Reservation.associate = db => {
-        Reservation.hasMany(db.Payment, {
+        Reservation.hasOne(db.Payment, {
             foreignKey: {
                 name: 'reservationId',
                 allowNull: false
@@ -33,16 +29,9 @@ module.exports = (sequelize, Datatypes) => {
             onDelete: 'RESTRICT'
         });
 
-        Reservation.belongsTo(db.Van, {
+        Reservation.belongsTo(db.Trip, {
             foreignKey: {
-                name: 'vanId',
-                allowNull: false
-            },
-            onDelete: 'RESTRICT'
-        });
-        Reservation.belongsTo(db.Timetable, {
-            foreignKey: {
-                name: 'timetableId',
+                name: 'tripId',
                 allowNull: false
             },
             onDelete: 'RESTRICT'

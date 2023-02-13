@@ -1,13 +1,13 @@
-module.exports = (sequelize, Datatypes) => {
+module.exports = (sequelize, DataTypes) => {
     const Payment = sequelize.define(
         'Payment',
         {
             paymentDate: {
-                type: Datatypes.DATEONLY,
+                type: DataTypes.DATEONLY,
                 allowNull: false
             },
             isPaid: {
-                type: Datatypes.BOOLEAN,
+                type: DataTypes.BOOLEAN,
                 defaultValue: false
             }
         },

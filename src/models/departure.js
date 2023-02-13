@@ -1,17 +1,17 @@
-module.exports = (sequelize, Datatypes) => {
+module.exports = (sequelize, DataTypes) => {
     const Departure = sequelize.define(
         'Departure',
         {
             startingTerminal: {
-                type: Datatypes.STRING,
+                type: DataTypes.STRING,
                 allowNull: false
             },
             destination: {
-                type: Datatypes.STRING,
+                type: DataTypes.STRING,
                 allowNull: false
             },
             price: {
-                type: Datatypes.DECIMAL(10, 2),
+                type: DataTypes.DECIMAL(10, 2),
                 allowNull: false,
                 defaultValue: 0
             }
@@ -23,14 +23,7 @@ module.exports = (sequelize, Datatypes) => {
     );
 
     Departure.associate = db => {
-        Departure.hasMany(db.Van, {
-            foreignKey: {
-                name: 'departureId',
-                allowNull: false
-            },
-            onDelete: 'RESTRICT'
-        });
-        Departure.hasMany(db.Timetable, {
+        Departure.hasMany(db.Trip, {
             foreignKey: {
                 name: 'departureId',
                 allowNull: false
