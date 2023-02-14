@@ -11,16 +11,38 @@ exports.createTrip = async (req, res, next) => {
 
 exports.getAllTrip = async (req, res, next) => {
     try {
+        const { origin, finalPlace, bookingDate } = req.query;
+        console.log({ origin, finalPlace, bookingDate });
+        if (!origin || !finalPlace || !bookingDate) {
+            console.log('test1');
+            const trips = await Trip.findAll({
+                include: [
+                    {
+                        model: Departure
+                    },
+                    {
+                        model: Timetable
+                    }
+                ]
+            });
+            return res.json({ trips });
+        }
+
+        console.log({ origin, finalPlace, bookingDate });
         const trips = await Trip.findAll({
             include: [
                 {
-                    model: Van
+                    model: Departure,
+                    where: {
+                        startingTerminal: origin,
+                        destination: finalPlace
+                    }
                 },
                 {
-                    model: Departure
-                },
-                {
-                    model: Timetable
+                    model: Timetable,
+                    where: {
+                        date: new Date(bookingDate)
+                    }
                 }
             ]
         });

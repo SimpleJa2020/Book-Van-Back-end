@@ -1,12 +1,16 @@
 // const { validateReservation } = require('../validators/reservation-validator');
-const { Reservation, Trip, Passenger } = require('../models');
+const {
+    Reservation,
+    Trip,
+    Passenger,
+    Timetable,
+    Departure,
+    Van
+} = require('../models');
 exports.createReservation = async (req, res, next) => {
     try {
-        console.log(req);
-        const value = req.body;
+        const reservation = await Reservation.create({});
 
-        value.passengerId = req.passenger.id;
-        await Reservation.create(value);
         res.status(201).json({ message: 'create reservation success' });
     } catch (err) {
         next(err);
@@ -15,7 +19,7 @@ exports.createReservation = async (req, res, next) => {
 
 exports.getAllReservation = async (req, res, next) => {
     try {
-        const Reservations = await Reservation.findAll({
+        const reservation = await Reservation.findAll({
             include: [
                 {
                     model: Passenger,
@@ -24,20 +28,17 @@ exports.getAllReservation = async (req, res, next) => {
                     }
                 },
                 {
-                    model: Timetable,
-                    attributes: {
-                        exclude: ['departureId']
-                    },
+                    model: Trip,
+
                     include: {
-                        model: Departure
+                        model: Departure,
+                        Van,
+                        Timetable
                     }
-                },
-                {
-                    model: Van
                 }
             ]
         });
-        res.status(200).json({ Reservations });
+        res.status(200).json({ reservation });
     } catch (err) {
         next(err);
     }

@@ -10,7 +10,6 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 
 const authRoute = require('./routes/auth-route');
-const departureRoute = require('./routes/departure-route');
 const reservationRoute = require('./routes/reservation-route');
 const bookingRoute = require('./routes/booking-route');
 const tripRoute = require('./routes/trip-route');
@@ -33,7 +32,6 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/auth', authRoute);
-app.use('/departure', authenticateMiddleware, departureRoute);
 app.use('/reservation', authenticateMiddleware, reservationRoute);
 app.use('/booking', authenticateMiddleware, bookingRoute);
 app.use('/trip', authenticateMiddleware, tripRoute);
