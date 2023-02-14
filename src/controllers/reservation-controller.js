@@ -23,7 +23,7 @@ exports.createReservation = async (req, res, next) => {
 };
 
 exports.getAllReservation = async (req, res, next) => {
-    console.log(req.params);
+    console.log('---------------> ', req.params);
     try {
         const reservationId = req.params.reservationId;
         const reservation = await Reservation.findOne({
@@ -38,14 +38,21 @@ exports.getAllReservation = async (req, res, next) => {
                 {
                     model: Trip,
 
-                    include: {
-                        model: Departure,
-                        Van,
-                        Timetable
-                    }
+                    include: [
+                        {
+                            model: Timetable
+                        },
+                        {
+                            model: Van
+                        },
+                        {
+                            model: Departure
+                        }
+                    ]
                 }
             ]
         });
+        console.log('heloo', reservation);
         res.status(200).json({ reservation });
     } catch (err) {
         next(err);
