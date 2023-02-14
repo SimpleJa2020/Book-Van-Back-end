@@ -7,19 +7,27 @@ const {
     Departure,
     Van
 } = require('../models');
+const { route } = require('../routes/auth-route');
 exports.createReservation = async (req, res, next) => {
     try {
-        const reservation = await Reservation.create({});
+        const reservation = await Reservation.create({
+            vanSeatNumber: req.body.vanSeatNumber,
+            passengerId: req.passenger.id,
+            tripId: req.body.tripId
+        });
 
-        res.status(201).json({ message: 'create reservation success' });
+        res.status(201).json({ reservation });
     } catch (err) {
         next(err);
     }
 };
 
 exports.getAllReservation = async (req, res, next) => {
+    console.log(req.params);
     try {
-        const reservation = await Reservation.findAll({
+        const reservationId = req.params.reservationId;
+        const reservation = await Reservation.findOne({
+            where: { id: reservationId },
             include: [
                 {
                     model: Passenger,
