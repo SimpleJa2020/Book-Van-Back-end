@@ -10,11 +10,40 @@ const {
 const { route } = require('../routes/auth-route');
 exports.createReservation = async (req, res, next) => {
     try {
-        const reservation = await Reservation.create({
+        const reservation_xxx = await Reservation.create({
             vanSeatNumber: req.body.vanSeatNumber,
             passengerId: req.passenger.id,
             tripId: req.body.tripId
         });
+        // ----------------------------------------------------------------------
+
+        const reservation = await Reservation.findOne({
+            where: { id: reservation_xxx.id },
+            include: [
+                {
+                    model: Passenger,
+                    attributes: {
+                        exclude: ['password', 'role']
+                    }
+                },
+                {
+                    model: Trip,
+
+                    include: [
+                        {
+                            model: Timetable
+                        },
+                        {
+                            model: Van
+                        },
+                        {
+                            model: Departure
+                        }
+                    ]
+                }
+            ]
+        });
+        // ----------------------------------------------------------------------
 
         res.status(201).json({ reservation });
     } catch (err) {
