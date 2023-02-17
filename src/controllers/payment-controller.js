@@ -26,7 +26,7 @@ exports.getPayment = async (req, res, next) => {
             //     reservationId: req.body.reservationId
             // }
         });
-        res.status(200).json({ payments });
+        res.status(200).json(payments);
     } catch (err) {
         next(err);
     }
