@@ -30,9 +30,9 @@ module.exports = (sequelize, DataTypes) => {
             },
             onDelete: 'RESTRICT'
         });
-        Trip.belongsTo(db.Van, {
+        Trip.belongsTo(db.Seat, {
             foreignKey: {
-                name: 'vanId',
+                name: 'seatId',
                 allowNull: false
             },
             onDelete: 'RESTRICT'

@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     );
 
     Van.associate = db => {
-        Van.hasMany(db.Trip, {
+        Van.hasMany(db.Seat, {
             foreignKey: {
                 name: 'vanId',
                 allowNull: false
