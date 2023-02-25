@@ -2,7 +2,7 @@ const { Trip, Van, Departure, Timetable } = require('../models');
 
 exports.createTrip = async (req, res, next) => {
     try {
-        await Trip.create({ vanId: 3, departureId: 1, timetableId: 2 });
+        await Trip.create({ seatId: 3, departureId: 1, timetableId: 2 });
         res.status(201).json({ message: 'create success' });
     } catch (err) {
         next(err);
