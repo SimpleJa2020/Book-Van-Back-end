@@ -1,20 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
     const Van = sequelize.define(
         'Van',
-        {
-            vanNumber: {
-                type: DataTypes.INTEGER,
-                allowNull: false
-            },
-            vanStatus: {
-                type: DataTypes.BOOLEAN,
-                defaultValue: true
-            },
-            vanSeat: {
-                type: DataTypes.INTEGER,
-                allowNull: false
-            }
-        },
+        {},
         {
             underscored: true,
             timestamps: false
@@ -22,9 +9,9 @@ module.exports = (sequelize, DataTypes) => {
     );
 
     Van.associate = db => {
-        Van.hasMany(db.Seat, {
+        Van.belongsTo(db.Trip, {
             foreignKey: {
-                name: 'vanId',
+                name: 'tripId',
                 allowNull: false
             },
             onDelete: 'RESTRICT'
