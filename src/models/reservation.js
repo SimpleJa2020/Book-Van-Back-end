@@ -3,13 +3,12 @@ module.exports = (sequelize, DataTypes) => {
         'Reservation',
         {
             vanSeatNumber: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.STRING,
                 allowNull: false
             }
         },
         {
-            underscored: true,
-            timestamps: false
+            underscored: true
         }
     );
     Reservation.associate = db => {

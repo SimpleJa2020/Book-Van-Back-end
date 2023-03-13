@@ -3,6 +3,6 @@ const reservationController = require('../controllers/reservation-controller');
 const router = express.Router();
 
 router.post('/', reservationController.createReservation);
-router.get('/booked/:reservationId', reservationController.getAllReservation);
+router.get('/:reservationId', reservationController.getReservationById);
 
 module.exports = router;

@@ -3,8 +3,7 @@ module.exports = (sequelize, DataTypes) => {
         'Van',
         {},
         {
-            underscored: true,
-            timestamps: false
+            underscored: true
         }
     );
 

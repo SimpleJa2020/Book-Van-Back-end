@@ -2,47 +2,72 @@ const { Trip, Van, Departure, Timetable } = require('../models');
 
 exports.createTrip = async (req, res, next) => {
     try {
-        await Trip.create({ seatId: 3, departureId: 1, timetableId: 2 });
+        await Trip.create({ departureId: 1, timetableId: 1 });
         res.status(201).json({ message: 'create success' });
     } catch (err) {
         next(err);
     }
 };
 
+// exports.getAllTrip = async (req, res, next) => {
+//     try {
+//         const { origin, finalPlace, bookingDate, bookingTime } = req.query;
+//         console.log({ origin, finalPlace, bookingDate, bookingTime });
+//         if (!origin || !finalPlace || !bookingDate || !bookingTime) {
+//             console.log('test1');
+//             const trips = await Trip.findAll({
+//                 include: [
+//                     {
+//                         model: Van
+//                     },
+//                     {
+//                         model: Departure
+//                     },
+//                     {
+//                         model: Timetable
+//                     }
+//                 ]
+//             });
+//             return res.json({ trips });
+//         }
+
+//         console.log({ origin, finalPlace, bookingDate, bookingTime });
+//         const trips = await Trip.findAll({
+//             include: [
+//                 {
+//                     model: Departure,
+//                     where: {
+//                         startingTerminal: origin,
+//                         destination: finalPlace
+//                     }
+//                 },
+//                 {
+//                     model: Timetable,
+//                     where: {
+//                         date: new Date(bookingDate),
+//                         time: bookingTime
+//                     }
+//                 }
+//             ]
+//         });
+//         res.status(200).json({ trips });
+//     } catch (err) {
+//         next(err);
+//     }
+// };
+
 exports.getAllTrip = async (req, res, next) => {
     try {
-        const { origin, finalPlace, bookingDate } = req.query;
-        console.log({ origin, finalPlace, bookingDate });
-        if (!origin || !finalPlace || !bookingDate) {
-            console.log('test1');
-            const trips = await Trip.findAll({
-                include: [
-                    {
-                        model: Departure
-                    },
-                    {
-                        model: Timetable
-                    }
-                ]
-            });
-            return res.json({ trips });
-        }
-
-        console.log({ origin, finalPlace, bookingDate });
         const trips = await Trip.findAll({
             include: [
                 {
-                    model: Departure,
-                    where: {
-                        startingTerminal: origin,
-                        destination: finalPlace
-                    }
+                    model: Departure
                 },
                 {
-                    model: Timetable,
-                    where: {
-                        date: new Date(bookingDate)
-                    }
+                    model: Timetable
+                },
+                {
+                    model: Van
                 }
             ]
         });

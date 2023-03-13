@@ -4,6 +4,6 @@ const adminController = require('../controllers/admin-controller');
 
 const router = express.Router();
 
-router.post('/', adminController.createByAdmin);
+router.post('/createTimetable', adminController.createByAdmin);
 
 module.exports = router;

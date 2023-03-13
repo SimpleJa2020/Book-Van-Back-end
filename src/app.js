@@ -13,6 +13,7 @@ const authRoute = require('./routes/auth-route');
 const reservationRoute = require('./routes/reservation-route');
 const paymentRoute = require('./routes/payment-route');
 const tripRoute = require('./routes/trip-route');
+const adminRoute = require('./routes/admin-route');
 const notFoundMiddleware = require('./middlewares/not-found');
 const errorMiddleware = require('./middlewares/error');
 const authenticateMiddleware = require('./middlewares/authenticate');
@@ -35,6 +36,7 @@ app.use('/auth', authRoute);
 app.use('/reservation', authenticateMiddleware, reservationRoute);
 app.use('/trip', authenticateMiddleware, tripRoute);
 app.use('/payment', authenticateMiddleware, paymentRoute);
+app.use('/admin', adminRoute);
 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);

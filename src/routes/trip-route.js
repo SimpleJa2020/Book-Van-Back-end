@@ -3,7 +3,7 @@ const tripController = require('../controllers/trip-controller');
 const router = express.Router();
 
 router.post('/', tripController.createTrip);
-router.get('/', tripController.getAllTrip);
+router.get('/getAllTrip', tripController.getAllTrip);
 router.put('/:tripId', tripController.changeTrip);
 router.delete('/:tripId', tripController.cancelTrip);
 

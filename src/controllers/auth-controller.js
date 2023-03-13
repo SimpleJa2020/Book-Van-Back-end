@@ -82,3 +82,16 @@ exports.login = async (req, res, next) => {
         next(err);
     }
 };
+
+exports.getMe = async (req, res, next) => {
+    try {
+        const passengers = await Passenger.findOne({
+            where: { id: req.passenger.id },
+            attributes: ['id']
+        });
+
+        res.status(200).json({ passengers });
+    } catch (err) {
+        next(err);
+    }
+};
