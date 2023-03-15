@@ -15,7 +15,6 @@ exports.createReservation = async (req, res, next) => {
             vanSeatNumber: req.body.vanSeatNumber,
             passengerId: req.passenger.id,
             tripId: req.body.tripId
-            // tripId: req.body.tripId
         });
         // ----------------------------------------------------------------------
 
@@ -83,8 +82,21 @@ exports.getReservationById = async (req, res, next) => {
                 }
             ]
         });
-        console.log('heloo', reservation);
         res.status(200).json(reservation);
+    } catch (err) {
+        next(err);
+    }
+};
+
+exports.cancelReservation = async (req, res, next) => {
+    try {
+        const { reservationId } = req.params;
+        console.log('<-------------->', reservationId);
+
+        const unreserve = await Reservation.destroy({
+            where: { id: reservationId }
+        });
+        res.status(204).json({ unreserve });
     } catch (err) {
         next(err);
     }

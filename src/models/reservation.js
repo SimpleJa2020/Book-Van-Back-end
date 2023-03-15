@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
                 name: 'reservationId',
                 allowNull: false
             },
-            onDelete: 'RESTRICT'
+            onDelete: 'CASCADE'
         });
 
         Reservation.belongsTo(db.Passenger, {
@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
                 name: 'passengerId',
                 allowNull: false
             },
-            onDelete: 'RESTRICT'
+            onDelete: 'CASCADE'
         });
 
         Reservation.belongsTo(db.Trip, {
@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
                 name: 'tripId',
                 allowNull: false
             },
-            onDelete: 'RESTRICT'
+            onDelete: 'CASCADE'
         });
     };
 

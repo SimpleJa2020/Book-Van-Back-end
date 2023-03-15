@@ -2,13 +2,29 @@ const { Payment, Reservation } = require('../models');
 
 exports.createPayment = async (req, res, next) => {
     try {
-        let currentDate = new Date().toJSON();
+        console.log('uuuuuuu', req.body);
         await Payment.create({
-            paymentDate: currentDate,
+            paymentDate: req.body.createdAt,
             reservationId: req.body.reservationId,
-            isPaid: req.body.isPaid
+            isPaid: false
         });
         res.status(201).json({ message: 'create success' });
+    } catch (err) {
+        next(err);
+    }
+};
+
+exports.updatePayment = async (req, res, next) => {
+    try {
+        const [paymentUpdate] = await Payment.update(
+            { isPaid: true },
+            {
+                where: {
+                    reservationId: req.body.reservationId
+                }
+            }
+        );
+        res.status(200).json({ message: 'success update' });
     } catch (err) {
         next(err);
     }
@@ -17,14 +33,9 @@ exports.createPayment = async (req, res, next) => {
 exports.getPayment = async (req, res, next) => {
     try {
         const payments = await Payment.findAll({
-            include: [
-                {
-                    model: Reservation
-                }
-            ]
-            // where: {
-            //     reservationId: req.body.reservationId
-            // }
+            where: {
+                isPaid: true
+            }
         });
         res.status(200).json(payments);
     } catch (err) {

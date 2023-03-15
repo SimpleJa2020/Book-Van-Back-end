@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
                 name: 'tripId',
                 allowNull: false
             },
-            onDelete: 'RESTRICT'
+            onDelete: 'CASCADE'
         });
 
         Trip.hasMany(db.Van, {
@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
                 name: 'tripId',
                 allowNull: false
             },
-            onDelete: 'RESTRICT'
+            onDelete: 'CASCADE'
         });
 
         Trip.belongsTo(db.Timetable, {
@@ -35,14 +35,14 @@ module.exports = (sequelize, DataTypes) => {
                 name: 'timetableId',
                 allowNull: false
             },
-            onDelete: 'RESTRICT'
+            onDelete: 'CASCADE'
         });
         Trip.belongsTo(db.Departure, {
             foreignKey: {
                 name: 'departureId',
                 allowNull: false
             },
-            onDelete: 'RESTRICT'
+            onDelete: 'CASCADE'
         });
     };
     return Trip;

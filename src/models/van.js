@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
                 name: 'tripId',
                 allowNull: false
             },
-            onDelete: 'RESTRICT'
+            onDelete: 'CASCADE'
         });
     };
     return Van;

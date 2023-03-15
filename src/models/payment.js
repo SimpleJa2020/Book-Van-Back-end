@@ -2,10 +2,6 @@ module.exports = (sequelize, DataTypes) => {
     const Payment = sequelize.define(
         'Payment',
         {
-            paymentDate: {
-                type: DataTypes.DATEONLY,
-                allowNull: false
-            },
             isPaid: {
                 type: DataTypes.BOOLEAN,
                 defaultValue: false
@@ -22,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
                 name: 'reservationId',
                 allowNull: false
             },
-            onDelete: 'RESTRICT'
+            onDelete: 'CASCADE'
         });
     };
     return Payment;

@@ -57,7 +57,7 @@ module.exports = (sequelize, DataTypes) => {
                 name: 'passengerId',
                 allowNull: false
             },
-            onDelete: 'RESTRICT'
+            onDelete: 'CASCADE'
         });
     };
 

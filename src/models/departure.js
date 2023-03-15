@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
                 name: 'departureId',
                 allowNull: false
             },
-            onDelete: 'RESTRICT'
+            onDelete: 'CASCADE'
         });
     };
     return Departure;

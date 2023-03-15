@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
                 name: 'timetableId',
                 allowNull: false
             },
-            onDelete: 'RESTRICT'
+            onDelete: 'CASCADE'
         });
     };
     return Timetable;
